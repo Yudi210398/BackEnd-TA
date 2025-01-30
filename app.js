@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import routerError from "./router/routerError.js";
 import routerProduct from "./router/routerProduct.js";
 import fs from "fs";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 // import path from "path";
 import routerUsers from "./router/routerUser.js";
 import routerOrders from "./router/routerOrder.js";
