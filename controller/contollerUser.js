@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import HttpError from "../model/DummyData/http-error.js";
 import { validationResult } from "express-validator";
 import usersShema from "../model/data/usersShema.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 import fs from "fs";
 import orderShema from "../model/data/orderShema.js";
 
@@ -26,10 +27,10 @@ const userCart = async (reqs) => {
     .findById(reqs.userData.id)
     .populate("keranjang.item.produkIds");
   const hasildataStock = datasStock.keranjang.item.filter(
-    (data) => data._id.toString() === produkIds,
+    (data) => data._id.toString() === produkIds
   );
   const hasilDatas = datas.keranjang.item.filter(
-    (data) => data._id.toString() === produkIds,
+    (data) => data._id.toString() === produkIds
   );
   return { hasilDatas, datas, datasStock, hasildataStock };
 };
@@ -100,7 +101,7 @@ export const loginUser = async (req, res, next) => {
               kerangjang: dataEmail.keranjang.item.length,
             },
             "rahasia_ilahi",
-            { expiresIn: "1d" },
+            { expiresIn: "1d" }
           );
           return res.status(201).json({
             pesan: "sukses login",
@@ -141,7 +142,7 @@ export const getIdUser = async (req, res, next) => {
       .find()
       .populate("keranjang.item.produkIds keranjangOrder.item.produkIds");
     const dataIdUser = dataId.filter(
-      (data) => data._id.toString() === req.userData.id,
+      (data) => data._id.toString() === req.userData.id
     );
     if (dataIdUser.length === 0) throw new HttpError("Data tidak Ada", 401);
 
@@ -156,7 +157,7 @@ export const getIdUser = async (req, res, next) => {
 export const addQtyCart = async (req, res, next) => {
   try {
     const { hasilDatas, datas, datasStock, hasildataStock } = await userCart(
-      req,
+      req
     );
     const listItemCart = datasStock.keranjang.item;
 
@@ -195,7 +196,7 @@ export const addCart = async (req, res, next) => {
       (dataIndeks) =>
         dataIndeks.produkIds.toString() === produkIds &&
         dataIndeks.ukuran === ukuran &&
-        dataIndeks.noteProduk === noteProduk,
+        dataIndeks.noteProduk === noteProduk
     );
     let quantityAdd;
     let productPush =
@@ -230,7 +231,7 @@ export const deleteCartId = async (req, res, next) => {
     const { datas } = await userCart(req);
 
     const hasilDatas = datas.keranjang.item.filter(
-      (data) => data._id.toString() !== idProduct,
+      (data) => data._id.toString() !== idProduct
     );
     datas.keranjang.item = hasilDatas;
     datas.save();
@@ -285,7 +286,7 @@ export const editProfileUser = async (req, res, next) => {
   try {
     const allIUser = await usersShema.find();
     const filterData = allIUser.filter(
-      (data) => data._id.toString() === req.userData.id,
+      (data) => data._id.toString() === req.userData.id
     );
     if (filterData.length === 0) throw new HttpError("data Kosong", 401);
     const { namaUser, gender } = req.body;

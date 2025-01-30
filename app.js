@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import routerError from "./router/routerError.js";
 import routerProduct from "./router/routerProduct.js";
 import fs from "fs";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 // import path from "path";
 import routerUsers from "./router/routerUser.js";
 import routerOrders from "./router/routerOrder.js";
@@ -83,7 +83,9 @@ const URLDATABASE = `mongodb+srv://yudiberland:kawasanzombi1998@microserirvices.
     }
 
     if (err) console.log(err);
-    await app.listen(port, () => console.log(`konek dan konek ke database`));
+    await app.listen(port, () =>
+      console.log(`konek dan konek ke database ${process.version}`)
+    );
     db.on("disconnect", function (errrs) {
       console.log("Error...close", errrs);
     });
