@@ -12,7 +12,7 @@ import adminSchema from "./model/data/adminSchema.js";
 import routerAdmin from "./router/routerAdmin.js";
 const app = express();
 const port = 5000;
-const URLDATABASE = `mongodb://runatyudi:kawasanrokok1998@cluster0-shard-00-00.oaqmd.mongodb.net:27017,cluster0-shard-00-01.oaqmd.mongodb.net:27017,cluster0-shard-00-02.oaqmd.mongodb.net:27017/dataLords?ssl=true&replicaSet=atlas-myi90d-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const URLDATABASE = `mongodb+srv://yudiberland:kawasanzombi1998@microserirvices.lru6i.mongodb.net/shopOnline?retryWrites=true&w=majority&appName=microserirvices`;
 
 (async () => {
   app.use(bodyParser.json());
